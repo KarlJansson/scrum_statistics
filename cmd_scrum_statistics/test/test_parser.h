@@ -1,6 +1,10 @@
 #include "csv_reader.h"
+#include "scrum_printer.h"
 
 TEST(CsvReader, parse_data) {
   CsvReader reader;
-  reader.Parse("./data.csv");
+  ScrumPrinter printer;
+
+  auto frame = reader.Parse("./data.csv");
+  printer.Print(frame);
 }

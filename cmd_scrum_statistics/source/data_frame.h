@@ -6,13 +6,23 @@
 #include <string>
 #include <string_view>
 #include <vector>
+#include <set>
 
 class DataFrameView {
  public:
   void AddView(size_t x, size_t y, std::string_view view);
   std::string_view GetView(size_t x, size_t y);
+
   size_t GetSizeX();
   size_t GetSizeY();
+
+  void RemoveColumn(size_t x);
+  void RemoveRow(size_t y);
+
+  void AppendColumn(std::vector<std::string_view> column);
+  void AppendRow(std::vector<std::string_view> row);
+
+  DataFrameView FilterFrameView(std::set<std::string> column_names);
 
  private:
   std::vector<std::vector<std::string_view>> frame_;

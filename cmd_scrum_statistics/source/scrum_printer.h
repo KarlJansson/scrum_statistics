@@ -6,5 +6,5 @@ class ScrumPrinter {
   void Print(DataFrame& frame);
 
  private:
-  void PointBurndown(DataFrameView view);
+  void PointBurndown(DataFrameView& view);
 };

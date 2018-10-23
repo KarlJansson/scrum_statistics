@@ -9,7 +9,8 @@ void ScrumPrinter::Print(DataFrame& frame) {
   }
 }
 
-void ScrumPrinter::PointBurndown(DataFrameView view) {
+void ScrumPrinter::PointBurndown(DataFrameView& view) {
   GraphMaker g_maker;
-  g_maker.MakeGraph("PointBurndown_", view);
+  auto filtered_view = view.FilterFrameView({"Days", "NrPoints", "NrStories"});
+  g_maker.MakeGraph("PointBurndown_", filtered_view);
 }

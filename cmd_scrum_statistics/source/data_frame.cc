@@ -17,6 +17,32 @@ size_t DataFrameView::GetSizeX() { return frame_.size(); }
 size_t DataFrameView::GetSizeY() {
   return frame_.empty() ? 0 : frame_[0].size();
 }
+void DataFrameView::RemoveColumn(size_t x) {
+  frame_.erase(std::begin(frame_) + x);
+}
+
+void DataFrameView::RemoveRow(size_t y) {
+  for (auto& vec : frame_) vec.erase(std::begin(vec) + y);
+}
+
+void DataFrameView::AppendColumn(std::vector<std::string_view> column) {
+  frame_.emplace_back(column);
+}
+
+void DataFrameView::AppendRow(std::vector<std::string_view> row) {
+  auto x = 0;
+  for (auto& vec : frame_) vec.emplace_back(row[x++]);
+}
+
+DataFrameView DataFrameView::FilterFrameView(
+    std::set<std::string> column_names) {
+  DataFrameView view;
+  for (auto i = 0; i < frame_.size(); ++i) {
+    if (column_names.find(std::string(frame_[i][0])) != std::end(column_names))
+      view.AppendColumn(frame_[i]);
+  }
+  return view;
+}
 
 std::optional<DataFrameView> DataFrame::GetDataFrameView() {
   return master_view_ ? std::optional<DataFrameView>(*master_view_)

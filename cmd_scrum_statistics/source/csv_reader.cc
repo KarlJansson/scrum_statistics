@@ -19,30 +19,19 @@ std::unique_ptr<DataFrameView> CsvReader::SetupViews(std::vector<char>& data) {
   std::unique_ptr<DataFrameView> master_view =
       std::make_unique<DataFrameView>();
 
-  std::size_t start = 0, end = 0, x = 0, y = 0;
+  std::size_t start = 0, end = 0, x = 0, y = 0, end_tmp, start_tmp;
   for (auto c : data) {
     switch (c) {
-      case '\r':
-        break;
       case '\n':
-        if (start != end) {
-          while (start < end && data[start] == ' ') ++start;
-          while (end - 1 > start && data[end - 1] == ' ') --end;
-          master_view->AddView(x, y,
-                               std::string_view(&data[start], end - start));
-        }
-        ++y, x = 0, start = 0, end = 0;
+        ++end, ++y, x = 0, start = end;
         break;
-      case '\t':
       case ',':
-        if (start != end) {
-          std::size_t end_tmp = end, start_tmp = start;
-          while (start_tmp < end_tmp && data[start_tmp] == ' ') ++start_tmp;
-          while (end_tmp - 1 > start_tmp && data[end_tmp - 1] == ' ') --end_tmp;
-          master_view->AddView(
-              x, y, std::string_view(&data[start], end_tmp - start_tmp));
-        }
-        ++x, start = end;
+        end_tmp = end, start_tmp = start;
+        while (start_tmp < end_tmp && data[start_tmp] == ' ') ++start_tmp;
+        while (end_tmp - 1 > start_tmp && data[end_tmp - 1] == ' ') --end_tmp;
+        master_view->AddView(
+            x, y, std::string_view(&data[start_tmp], end_tmp - start_tmp));
+        ++end, ++x, start = end;
         break;
       default:
         ++end;

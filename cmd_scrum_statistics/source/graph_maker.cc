@@ -33,7 +33,7 @@ std::string GraphMaker::GeneratePlot(DataFrameView& view) {
   out += "EOD\n";
   out += "plot ";
   for (auto i = 1; i < view.GetSizeX(); ++i) {
-    out += "'$data' " + std::to_string(1) + ":" + std::to_string(i + 1) +
+    out += "'$data' using " + std::to_string(1) + ":" + std::to_string(i + 1) +
            " t \"" + std::string(view.GetView(i, 0)) +
            "\" with linespoints ls " + std::to_string(i);
     out += i == view.GetSizeX() - 1 ? "" : ",\\\n";

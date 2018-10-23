@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/data/Repositories/scrum_statistics/_build_release_/cmd_scrum_statistics",
+  "command": "/usr/bin/clang++  -DUNICODE -DUnixBuild -D_UNICODE -I/data/Repositories/scrum_statistics/cmd_scrum_statistics/scrum_statistics -I/data/Repositories/scrum_statistics/cmd_scrum_statistics/./source  -Wall -std=c++17 -O3 -DNDEBUG   -o CMakeFiles/scrum_statistics.dir/source/main.cc.o -c /data/Repositories/scrum_statistics/cmd_scrum_statistics/source/main.cc",
+  "file": "/data/Repositories/scrum_statistics/cmd_scrum_statistics/source/main.cc"
+}
+]

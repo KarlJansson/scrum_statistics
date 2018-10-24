@@ -1,5 +1,7 @@
 #include "data_frame.h"
 
+#include <iostream>
+
 void DataFrameView::AddView(size_t x, size_t y, std::string_view view) {
   while (frame_.size() <= x) frame_.push_back({});
   while (frame_[x].size() <= y) frame_[x].push_back({});
@@ -10,6 +12,13 @@ std::string_view DataFrameView::GetView(size_t x, size_t y) {
   if (frame_.size() <= x) return {};
   if (frame_[x].size() <= y) return {};
   return frame_[x][y];
+}
+
+void DataFrameView::PrintView() {
+  for (auto& x : frame_) {
+    for (auto y : x) std::cout << std::string(y) << ",";
+    std::cout << std::endl;
+  }
 }
 
 size_t DataFrameView::GetSizeX() { return frame_.size(); }
@@ -32,6 +41,14 @@ void DataFrameView::AppendColumn(std::vector<std::string_view> column) {
 void DataFrameView::AppendRow(std::vector<std::string_view> row) {
   auto x = 0;
   for (auto& vec : frame_) vec.emplace_back(row[x++]);
+}
+
+void DataFrameView::AppendRow(std::size_t row, DataFrameView& view) {
+  std::size_t y = GetSizeY();
+  for (auto x = 0; x < view.GetSizeX(); ++x) {
+    auto str_view = view.GetView(x, row);
+    if (!str_view.empty()) AddView(x, y, str_view);
+  }
 }
 
 DataFrameView DataFrameView::FilterFrameView(

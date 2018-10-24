@@ -1,37 +1,37 @@
 [
 {
-  "directory": "/data/Repositories/scrum_statistics/_build_release_/cmd_scrum_statistics",
-  "command": "/usr/bin/clang++  -DUNICODE -DUnixBuild -D_UNICODE -I/data/Repositories/scrum_statistics/cmd_scrum_statistics/scrum_statistics -I/data/Repositories/scrum_statistics/cmd_scrum_statistics/./assets -I/data/Repositories/scrum_statistics/cmd_scrum_statistics/./source -I/data/Repositories/scrum_statistics/cmd_scrum_statistics/./test  -Wall -std=c++17 -O3 -DNDEBUG   -o CMakeFiles/scrum_statistics.dir/source/main.cc.o -c /data/Repositories/scrum_statistics/cmd_scrum_statistics/source/main.cc",
-  "file": "/data/Repositories/scrum_statistics/cmd_scrum_statistics/source/main.cc"
+  "directory": "/home/karljansson/Repositories/scrum_statistics/_build_release_/cmd_scrum_statistics",
+  "command": "/usr/bin/clang++  -DUNICODE -DUnixBuild -D_UNICODE -I/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/scrum_statistics -I/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/./assets -I/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/./source -I/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/./test  -Wall -std=c++17 -O3 -DNDEBUG   -o CMakeFiles/scrum_statistics.dir/source/csv_reader.cc.o -c /home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/source/csv_reader.cc",
+  "file": "/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/source/csv_reader.cc"
 },
 {
-  "directory": "/data/Repositories/scrum_statistics/_build_release_/cmd_scrum_statistics",
-  "command": "/usr/bin/clang++  -DUNICODE -DUnixBuild -D_UNICODE -I/data/Repositories/scrum_statistics/cmd_scrum_statistics/scrum_statistics -I/data/Repositories/scrum_statistics/cmd_scrum_statistics/./assets -I/data/Repositories/scrum_statistics/cmd_scrum_statistics/./source -I/data/Repositories/scrum_statistics/cmd_scrum_statistics/./test  -Wall -std=c++17 -O3 -DNDEBUG   -o CMakeFiles/scrum_statistics.dir/source/graph_maker.cc.o -c /data/Repositories/scrum_statistics/cmd_scrum_statistics/source/graph_maker.cc",
-  "file": "/data/Repositories/scrum_statistics/cmd_scrum_statistics/source/graph_maker.cc"
+  "directory": "/home/karljansson/Repositories/scrum_statistics/_build_release_/cmd_scrum_statistics",
+  "command": "/usr/bin/clang++  -DUNICODE -DUnixBuild -D_UNICODE -I/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/scrum_statistics -I/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/./assets -I/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/./source -I/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/./test  -Wall -std=c++17 -O3 -DNDEBUG   -o CMakeFiles/scrum_statistics.dir/source/main.cc.o -c /home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/source/main.cc",
+  "file": "/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/source/main.cc"
 },
 {
-  "directory": "/data/Repositories/scrum_statistics/_build_release_/cmd_scrum_statistics",
-  "command": "/usr/bin/clang++  -DUNICODE -DUnixBuild -D_UNICODE -I/data/Repositories/scrum_statistics/cmd_scrum_statistics/scrum_statistics -I/data/Repositories/scrum_statistics/cmd_scrum_statistics/./assets -I/data/Repositories/scrum_statistics/cmd_scrum_statistics/./source -I/data/Repositories/scrum_statistics/cmd_scrum_statistics/./test  -Wall -std=c++17 -O3 -DNDEBUG   -o CMakeFiles/scrum_statistics.dir/source/csv_reader.cc.o -c /data/Repositories/scrum_statistics/cmd_scrum_statistics/source/csv_reader.cc",
-  "file": "/data/Repositories/scrum_statistics/cmd_scrum_statistics/source/csv_reader.cc"
+  "directory": "/home/karljansson/Repositories/scrum_statistics/_build_release_/cmd_scrum_statistics",
+  "command": "/usr/bin/clang++  -DUNICODE -DUnixBuild -D_UNICODE -I/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/scrum_statistics -I/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/./assets -I/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/./source -I/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/./test  -Wall -std=c++17 -O3 -DNDEBUG   -o CMakeFiles/scrum_statistics.dir/source/scrum_printer.cc.o -c /home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/source/scrum_printer.cc",
+  "file": "/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/source/scrum_printer.cc"
 },
 {
-  "directory": "/data/Repositories/scrum_statistics/_build_release_/cmd_scrum_statistics",
-  "command": "/usr/bin/clang++  -DUNICODE -DUnixBuild -D_UNICODE -I/data/Repositories/scrum_statistics/cmd_scrum_statistics/scrum_statistics -I/data/Repositories/scrum_statistics/cmd_scrum_statistics/./assets -I/data/Repositories/scrum_statistics/cmd_scrum_statistics/./source -I/data/Repositories/scrum_statistics/cmd_scrum_statistics/./test  -Wall -std=c++17 -O3 -DNDEBUG   -o CMakeFiles/scrum_statistics.dir/source/scrum_printer.cc.o -c /data/Repositories/scrum_statistics/cmd_scrum_statistics/source/scrum_printer.cc",
-  "file": "/data/Repositories/scrum_statistics/cmd_scrum_statistics/source/scrum_printer.cc"
+  "directory": "/home/karljansson/Repositories/scrum_statistics/_build_release_/cmd_scrum_statistics",
+  "command": "/usr/bin/clang++  -DUNICODE -DUnixBuild -D_UNICODE -I/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/scrum_statistics -I/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/./assets -I/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/./source -I/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/./test  -Wall -std=c++17 -O3 -DNDEBUG   -o CMakeFiles/scrum_statistics.dir/source/data_frame.cc.o -c /home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/source/data_frame.cc",
+  "file": "/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/source/data_frame.cc"
 },
 {
-  "directory": "/data/Repositories/scrum_statistics/_build_release_/cmd_scrum_statistics",
-  "command": "/usr/bin/clang++  -DUNICODE -DUnixBuild -D_UNICODE -I/data/Repositories/scrum_statistics/cmd_scrum_statistics/scrum_statistics -I/data/Repositories/scrum_statistics/cmd_scrum_statistics/./assets -I/data/Repositories/scrum_statistics/cmd_scrum_statistics/./source -I/data/Repositories/scrum_statistics/cmd_scrum_statistics/./test  -Wall -std=c++17 -O3 -DNDEBUG   -o CMakeFiles/scrum_statistics.dir/source/data_frame.cc.o -c /data/Repositories/scrum_statistics/cmd_scrum_statistics/source/data_frame.cc",
-  "file": "/data/Repositories/scrum_statistics/cmd_scrum_statistics/source/data_frame.cc"
+  "directory": "/home/karljansson/Repositories/scrum_statistics/_build_release_/cmd_scrum_statistics",
+  "command": "/usr/bin/clang++  -DUNICODE -DUnixBuild -D_UNICODE -I/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/scrum_statistics -I/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/./assets -I/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/./source -I/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/./test  -Wall -std=c++17 -O3 -DNDEBUG   -o CMakeFiles/scrum_statistics.dir/source/graph_maker.cc.o -c /home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/source/graph_maker.cc",
+  "file": "/home/karljansson/Repositories/scrum_statistics/cmd_scrum_statistics/source/graph_maker.cc"
 },
 {
-  "directory": "/data/Repositories/scrum_statistics/_build_release_/test_driver",
-  "command": "/usr/bin/clang++  -DUNICODE -DUnixBuild -D_UNICODE -I/data/Repositories/scrum_statistics/test_driver/driver -I/usr/local/include -I/data/Repositories/scrum_statistics/test_driver/../cmd_scrum_statistics/assets -I/data/Repositories/scrum_statistics/test_driver/../cmd_scrum_statistics/source -I/data/Repositories/scrum_statistics/test_driver/../cmd_scrum_statistics/test  -Wall -std=c++17 -O3 -DNDEBUG   -o CMakeFiles/driver.dir/test_main.cc.o -c /data/Repositories/scrum_statistics/test_driver/test_main.cc",
-  "file": "/data/Repositories/scrum_statistics/test_driver/test_main.cc"
+  "directory": "/home/karljansson/Repositories/scrum_statistics/_build_release_/test_driver",
+  "command": "/usr/bin/clang++  -DUNICODE -DUnixBuild -D_UNICODE -I/home/karljansson/Repositories/scrum_statistics/test_driver/driver -I/home/karljansson/Repositories/scrum_statistics/test_driver/../cmd_scrum_statistics/assets -I/home/karljansson/Repositories/scrum_statistics/test_driver/../cmd_scrum_statistics/source -I/home/karljansson/Repositories/scrum_statistics/test_driver/../cmd_scrum_statistics/test  -Wall -std=c++17 -O3 -DNDEBUG   -o CMakeFiles/driver.dir/test_main.cc.o -c /home/karljansson/Repositories/scrum_statistics/test_driver/test_main.cc",
+  "file": "/home/karljansson/Repositories/scrum_statistics/test_driver/test_main.cc"
 },
 {
-  "directory": "/data/Repositories/scrum_statistics/_build_release_/test_driver",
-  "command": "/usr/bin/clang++  -DUNICODE -DUnixBuild -D_UNICODE -I/data/Repositories/scrum_statistics/test_driver/driver -I/usr/local/include -I/data/Repositories/scrum_statistics/test_driver/../cmd_scrum_statistics/assets -I/data/Repositories/scrum_statistics/test_driver/../cmd_scrum_statistics/source -I/data/Repositories/scrum_statistics/test_driver/../cmd_scrum_statistics/test  -Wall -std=c++17 -O3 -DNDEBUG   -o CMakeFiles/driver.dir/precomp.cc.o -c /data/Repositories/scrum_statistics/test_driver/precomp.cc",
-  "file": "/data/Repositories/scrum_statistics/test_driver/precomp.cc"
+  "directory": "/home/karljansson/Repositories/scrum_statistics/_build_release_/test_driver",
+  "command": "/usr/bin/clang++  -DUNICODE -DUnixBuild -D_UNICODE -I/home/karljansson/Repositories/scrum_statistics/test_driver/driver -I/home/karljansson/Repositories/scrum_statistics/test_driver/../cmd_scrum_statistics/assets -I/home/karljansson/Repositories/scrum_statistics/test_driver/../cmd_scrum_statistics/source -I/home/karljansson/Repositories/scrum_statistics/test_driver/../cmd_scrum_statistics/test  -Wall -std=c++17 -O3 -DNDEBUG   -o CMakeFiles/driver.dir/precomp.cc.o -c /home/karljansson/Repositories/scrum_statistics/test_driver/precomp.cc",
+  "file": "/home/karljansson/Repositories/scrum_statistics/test_driver/precomp.cc"
 }
 ]

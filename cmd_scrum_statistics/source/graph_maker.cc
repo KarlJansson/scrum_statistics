@@ -7,6 +7,7 @@ void GraphMaker::MakeGraph(const std::string& out, DataFrameView& view) {
   fp = popen("gnuplot", "w");
   fprintf(fp, "reset\n");
   fprintf(fp, "set terminal png font arial 14 size 800,600\n");
+  fprintf(fp, "set xlabel \"%s\"\n", std::string(view.GetView(0, 0)).c_str());
   fprintf(fp, "%s", out_command.c_str());
   fprintf(fp, "%s", SetStyle().c_str());
   fprintf(fp, "%s", GeneratePlot(view).c_str());

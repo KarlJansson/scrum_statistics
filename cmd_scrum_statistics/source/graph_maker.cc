@@ -3,11 +3,20 @@
 void GraphMaker::MakeGraph(const std::string& out, DataFrameView& view) {
   std::string out_command = "set output '" + out + ".png'\n";
 
+  std::string y_label_command = "set ylabel \"";
+  for (auto i = 1; i < view.GetSizeX(); ++i) {
+    y_label_command += std::string(view.GetView(i, 0));
+    if (i + 1 < view.GetSizeX()) y_label_command += " / ";
+  }
+  y_label_command += "\"\n";
+
   FILE* fp;
   fp = popen("gnuplot", "w");
   fprintf(fp, "reset\n");
   fprintf(fp, "set terminal png font arial 14 size 800,600\n");
   fprintf(fp, "set xlabel \"%s\"\n", std::string(view.GetView(0, 0)).c_str());
+  fprintf(fp, "%s", y_label_command.c_str());
+  fprintf(fp, "set title \"%s\"\n", out.c_str());
   fprintf(fp, "%s", out_command.c_str());
   fprintf(fp, "%s", SetStyle().c_str());
   fprintf(fp, "%s", GeneratePlot(view).c_str());
@@ -54,6 +63,7 @@ std::string GraphMaker::SetStyle() {
          "set style line 81 lt rgb \"#808080\"  # grey\n"
          "set grid back linestyle 81\n"
          "set border 3 back linestyle 80\n"
+         "set pointsize 2\n"
          "set xtics nomirror\n"
          "set ytics nomirror\n";
 }

@@ -4,35 +4,35 @@ cmake_minimum_required(VERSION 3.6)
 
 
 set(cpp_files
-  ./source/csv_reader.cc
   ./source/main.cc
+  ./source/graph_maker.cc
+  ./source/csv_reader.cc
   ./source/scrum_printer.cc
   ./source/data_frame.cc
-  ./source/graph_maker.cc
-  ./source/scrum_printer.h
-  ./source/data_frame.h
   ./source/csv_reader.h
+  ./source/data_frame.h
   ./source/graph_maker.h
+  ./source/scrum_printer.h
   ./test/test_parser.h
+)
+
+source_group(assets FILES
+)
+
+source_group(source FILES
+  ./source/main.cc
+  ./source/graph_maker.cc
+  ./source/csv_reader.cc
+  ./source/scrum_printer.cc
+  ./source/data_frame.cc
+  ./source/csv_reader.h
+  ./source/data_frame.h
+  ./source/graph_maker.h
+  ./source/scrum_printer.h
 )
 
 source_group(test FILES
   ./test/test_parser.h
-)
-
-source_group(source FILES
-  ./source/csv_reader.cc
-  ./source/main.cc
-  ./source/scrum_printer.cc
-  ./source/data_frame.cc
-  ./source/graph_maker.cc
-  ./source/scrum_printer.h
-  ./source/data_frame.h
-  ./source/csv_reader.h
-  ./source/graph_maker.h
-)
-
-source_group(assets FILES
 )
 
 add_executable(scrum_statistics ${cpp_files})

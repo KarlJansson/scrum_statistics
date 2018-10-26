@@ -2,6 +2,10 @@
 
 #include <iostream>
 
+DataFrameView::DataFrameView(const std::string& name) : name_(name) {}
+
+const std::string& DataFrameView::GetName() { return name_; }
+
 void DataFrameView::AddView(size_t x, size_t y, std::string_view view) {
   while (frame_.size() <= x) frame_.push_back({});
   while (frame_[x].size() <= y) frame_[x].push_back({});
@@ -53,7 +57,7 @@ void DataFrameView::AppendRow(std::size_t row, DataFrameView& view) {
 
 DataFrameView DataFrameView::FilterFrameView(
     std::set<std::string> column_names) {
-  DataFrameView view;
+  DataFrameView view(name_);
   for (auto i = 0; i < frame_.size(); ++i) {
     if (column_names.find(std::string(frame_[i][0])) != std::end(column_names))
       view.AppendColumn(frame_[i]);
@@ -61,13 +65,13 @@ DataFrameView DataFrameView::FilterFrameView(
   return view;
 }
 
+DataFrame::DataFrame(std::vector<char>&& data,
+                     std::unique_ptr<DataFrameView>&& master_view) {
+  master_view_ = std::move(master_view);
+  raw_data_ = std::move(data);
+}
+
 std::optional<DataFrameView> DataFrame::GetDataFrameView() {
   return master_view_ ? std::optional<DataFrameView>(*master_view_)
                       : std::optional<DataFrameView>();
-}
-
-void DataFrame::CreateDataFrame(std::vector<char>&& data,
-                                std::unique_ptr<DataFrameView>&& master_view) {
-  master_view_ = std::move(master_view);
-  raw_data_ = std::move(data);
 }

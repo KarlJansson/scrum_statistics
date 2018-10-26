@@ -7,5 +7,6 @@ class CsvReader {
   DataFrame Parse(const std::string& path);
 
  private:
-  std::unique_ptr<DataFrameView> SetupViews(std::vector<char>& data);
+  std::unique_ptr<DataFrameView> SetupViews(const std::string& path,
+                                            std::vector<char>& data);
 };

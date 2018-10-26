@@ -1,1 +1,6 @@
 cpp_version:c++17
+
+{
+	name : "filesystem"
+	lib_dir : "libstdc++fs.a" 
+}

@@ -1,5 +1,8 @@
 #include "graph_maker.h"
 
+#include <fstream>
+#include <iostream>
+
 void GraphMaker::MakeGraph(const std::string& out, DataFrameView& view) {
   std::string out_command = "set output '" + out + ".png'\n";
 
@@ -18,7 +21,7 @@ void GraphMaker::MakeGraph(const std::string& out, DataFrameView& view) {
   fprintf(fp, "%s", y_label_command.c_str());
   fprintf(fp, "set title \"%s\"\n", out.c_str());
   fprintf(fp, "%s", out_command.c_str());
-  fprintf(fp, "%s", SetStyle().c_str());
+  fprintf(fp, "%s", SetStyle(view).c_str());
   fprintf(fp, "%s", GeneratePlot(view).c_str());
 
   pclose(fp);
@@ -51,19 +54,31 @@ std::string GraphMaker::GeneratePlot(DataFrameView& view) {
   return out;
 }
 
-std::string GraphMaker::SetStyle() {
-  return "set style line 1 lt rgb \"#A00000\" lw 2 pt 1\n"
-         "set style line 2 lt rgb \"#00A000\" lw 2 pt 6\n"
-         "set style line 3 lt rgb \"#5060D0\" lw 2 pt 2\n"
-         "set style line 4 lt rgb \"#F25900\" lw 2 pt 9\n"
-         // Line style for axes
-         "set style line 80 lt rgb \"#808080\"\n"
-         // Line style for grid
-         "set style line 81 lt 0  # dashed\n"
-         "set style line 81 lt rgb \"#808080\"  # grey\n"
-         "set grid back linestyle 81\n"
-         "set border 3 back linestyle 80\n"
-         "set pointsize 2\n"
-         "set xtics nomirror\n"
-         "set ytics nomirror\n";
+std::string GraphMaker::SetStyle(DataFrameView& view) {
+  std::string style =
+      "set style line 1 lt rgb \"#A00000\" lw 2 pt 1\n"
+      "set style line 2 lt rgb \"#00A000\" lw 2 pt 6\n"
+      "set style line 3 lt rgb \"#5060D0\" lw 2 pt 2\n"
+      "set style line 4 lt rgb \"#F25900\" lw 2 pt 9\n"
+      // Line style for axes
+      "set style line 80 lt rgb \"#808080\"\n"
+      // Line style for grid
+      "set style line 81 lt 0  # dashed\n"
+      "set style line 81 lt rgb \"#808080\"  # grey\n"
+      "set grid back linestyle 81\n"
+      "set border 3 back linestyle 80\n"
+      "set xtics nomirror\n"
+      "set ytics nomirror\n";
+
+  std::string path = view.GetName();
+  std::ifstream open(path.substr(0, path.find_last_of('.')) + ".cfg");
+  if (!open.fail()) {
+    std::string line;
+    while (!open.eof()) {
+      std::getline(open, line);
+      style += line + "\n";
+    }
+  }
+
+  return style;
 }

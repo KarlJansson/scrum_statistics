@@ -10,14 +10,14 @@ DataFrame CsvReader::Parse(const std::string& path) {
   open.read(data.data(), data.size());
   open.close();
 
-  DataFrame frame;
-  frame.CreateDataFrame(std::move(data), SetupViews(data));
+  DataFrame frame(std::move(data), SetupViews(path, data));
   return frame;
 }
 
-std::unique_ptr<DataFrameView> CsvReader::SetupViews(std::vector<char>& data) {
+std::unique_ptr<DataFrameView> CsvReader::SetupViews(const std::string& path,
+                                                     std::vector<char>& data) {
   std::unique_ptr<DataFrameView> master_view =
-      std::make_unique<DataFrameView>();
+      std::make_unique<DataFrameView>(path);
 
   std::size_t start = 0, end = 0, x = 0, y = 0, end_tmp, start_tmp;
   for (auto c : data) {

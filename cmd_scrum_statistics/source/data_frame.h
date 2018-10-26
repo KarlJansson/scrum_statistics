@@ -10,6 +10,10 @@
 
 class DataFrameView {
  public:
+  DataFrameView(const std::string& name);
+
+  const std::string& GetName();
+
   void AddView(size_t x, size_t y, std::string_view view);
   std::string_view GetView(size_t x, size_t y);
 
@@ -28,14 +32,16 @@ class DataFrameView {
   DataFrameView FilterFrameView(std::set<std::string> column_names);
 
  private:
+  const std::string& name_;
   std::vector<std::vector<std::string_view>> frame_;
 };
 
 class DataFrame {
  public:
+  DataFrame(std::vector<char>&& data,
+            std::unique_ptr<DataFrameView>&& master_view);
+
   std::optional<DataFrameView> GetDataFrameView();
-  void CreateDataFrame(std::vector<char>&& data,
-                       std::unique_ptr<DataFrameView>&& master_view);
 
  private:
   std::vector<char> raw_data_;

@@ -7,5 +7,5 @@ class GraphMaker {
 
  private:
   std::string GeneratePlot(DataFrameView& view);
-  std::string SetStyle();
+  std::string SetStyle(DataFrameView& view);
 };

@@ -29,7 +29,7 @@ class DataFrameView {
   void AppendRow(std::vector<std::string_view> row);
   void AppendRow(std::size_t row, DataFrameView& view);
 
-  DataFrameView FilterFrameView(std::set<std::string> column_names);
+  DataFrameView FilterFrameView(std::vector<std::string> column_names);
 
  private:
   const std::string& name_;

@@ -29,6 +29,7 @@ target_link_libraries(driver
   ${GMOCK_LIBRARIES}
   ${GTEST_LIBRARIES}
   libpthread.so
+  libstdc++fs.a
 )
 
 add_dependencies(driver scrum_statistics ALL_PRE_BUILD)

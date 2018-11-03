@@ -44,6 +44,7 @@ include_directories(scrum_statistics
 )
 
 target_link_libraries(scrum_statistics
+  libstdc++fs.a
 )
 
 add_dependencies(scrum_statistics ALL_PRE_BUILD)

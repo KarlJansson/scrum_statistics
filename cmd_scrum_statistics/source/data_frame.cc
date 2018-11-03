@@ -56,12 +56,12 @@ void DataFrameView::AppendRow(std::size_t row, DataFrameView& view) {
 }
 
 DataFrameView DataFrameView::FilterFrameView(
-    std::set<std::string> column_names) {
+    std::vector<std::string> column_names) {
   DataFrameView view(name_);
-  for (auto i = 0; i < frame_.size(); ++i) {
-    if (column_names.find(std::string(frame_[i][0])) != std::end(column_names))
-      view.AppendColumn(frame_[i]);
-  }
+  for (auto i = 0; i < column_names.size(); ++i)
+    for (auto ii = 0; ii < frame_.size(); ++ii)
+      if (column_names[i].compare(std::string(frame_[ii][0])) == 0)
+        view.AppendColumn(frame_[ii]);
   return view;
 }
 

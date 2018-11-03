@@ -1,7 +1,8 @@
 #include "graph_maker.h"
 
 #include <fstream>
-#include <iostream>
+
+GraphMaker::GraphMaker(const GraphType type) : type_(type) {}
 
 void GraphMaker::MakeGraph(const std::string& out, DataFrameView& view) {
   std::string out_command = "set output '" + out + ".png'\n";
@@ -42,13 +43,17 @@ std::string GraphMaker::GeneratePlot(DataFrameView& view) {
     }
     out += "\n";
   }
-
   out += "EOD\n";
+
   out += "plot ";
   for (auto i = 1; i < view.GetSizeX(); ++i) {
-    out += "'$data' using " + std::to_string(1) + ":" + std::to_string(i + 1) +
-           " t \"" + std::string(view.GetView(i, 0)) +
-           "\" with linespoints ls " + std::to_string(i);
+    if (type_ != kHistogram)
+      out += "'$data' using " + std::to_string(1) + ":" +
+             std::to_string(i + 1) + " t \"" + std::string(view.GetView(i, 0)) +
+             "\" ls " + std::to_string(i);
+    else
+      out += "'$data' using " + std::to_string(i + 1) + " t \"" +
+             std::string(view.GetView(i, 0)) + "\" ls " + std::to_string(i);
     out += i == view.GetSizeX() - 1 ? "" : ",\\\n";
   }
   return out;
@@ -68,7 +73,25 @@ std::string GraphMaker::SetStyle(DataFrameView& view) {
       "set grid back linestyle 81\n"
       "set border 3 back linestyle 80\n"
       "set xtics nomirror\n"
-      "set ytics nomirror\n";
+      "set ytics nomirror\n"
+      "set boxwidth 0.75 absolute\n"
+      "set style fill solid 1.00 border lt -1\n";
+
+  switch (type_) {
+    case kLinePoint:
+      style += "set style data linespoints\n";
+      break;
+    case kLine:
+      style += "set style data lines\n";
+      break;
+    case kHistogram:
+      style += "set style data histogram\n";
+      style += "set style histogram rowstacked\n";
+      break;
+    case kBar:
+      style += "set style\n";
+      break;
+  }
 
   std::string path = view.GetName();
   std::ifstream open(path.substr(0, path.find_last_of('.')) + ".cfg");

@@ -1,4 +1,18 @@
-cmakemaker
+#!/bin/bash
+
+if ! [ -x "$(command -v cmake)" ]; then
+  echo 'Error: cmake is not installed.' >&2
+  exit 1
+fi
+
+if ! [ -x "$(command -v clang++)" ]; then
+  echo 'Error: clang is not installed.' >&2
+  exit 1
+fi
+
+if [ -x "$(command -v cmakemaker)" ]; then
+  cmakemaker
+fi
 
 rm -rf ./_build_release_
 mkdir _build_release_

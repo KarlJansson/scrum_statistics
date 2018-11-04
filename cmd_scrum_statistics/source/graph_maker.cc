@@ -17,7 +17,7 @@ void GraphMaker::MakeGraph(const std::string& out, DataFrameView& view) {
   FILE* fp;
   fp = popen("gnuplot", "w");
   fprintf(fp, "reset\n");
-  fprintf(fp, "set terminal png font arial 14 size 800,600\n");
+  fprintf(fp, "set terminal png font arial 14 size 1280,720\n");
   fprintf(fp, "set xlabel \"%s\"\n", std::string(view.GetView(0, 0)).c_str());
   fprintf(fp, "%s", y_label_command.c_str());
   fprintf(fp, "set title \"%s\"\n", out.c_str());
@@ -47,13 +47,16 @@ std::string GraphMaker::GeneratePlot(DataFrameView& view) {
 
   out += "plot ";
   for (auto i = 1; i < view.GetSizeX(); ++i) {
-    if (type_ != kHistogram)
-      out += "'$data' using " + std::to_string(1) + ":" +
-             std::to_string(i + 1) + " t \"" + std::string(view.GetView(i, 0)) +
-             "\" ls " + std::to_string(i);
-    else
-      out += "'$data' using " + std::to_string(i + 1) + " t \"" +
-             std::string(view.GetView(i, 0)) + "\" ls " + std::to_string(i);
+    switch (type_) {
+      case kHistogram:
+        out += "'$data' using " + std::to_string(i + 1) + " t \"" +
+               std::string(view.GetView(i, 0)) + "\" ls " + std::to_string(i);
+        break;
+      default:
+        out += "'$data' using " + std::to_string(1) + ":" +
+               std::to_string(i + 1) + " t \"" +
+               std::string(view.GetView(i, 0)) + "\" ls " + std::to_string(i);
+    }
     out += i == view.GetSizeX() - 1 ? "" : ",\\\n";
   }
   return out;

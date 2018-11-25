@@ -22,16 +22,21 @@ std::unique_ptr<DataFrameView> CsvReader::SetupViews(const std::string& path,
   std::size_t start = 0, end = 0, x = 0, y = 0, end_tmp, start_tmp;
   for (auto c : data) {
     switch (c) {
-      case '\n':
-        ++end, ++y, x = 0, start = end;
+      case '\r':
+        ++end, start = end;
         break;
+      case '\n':
       case ',':
-        end_tmp = end, start_tmp = start;
-        while (start_tmp < end_tmp && data[start_tmp] == ' ') ++start_tmp;
-        while (end_tmp - 1 > start_tmp && data[end_tmp - 1] == ' ') --end_tmp;
-        master_view->AddView(
-            x, y, std::string_view(&data[start_tmp], end_tmp - start_tmp));
+      case '\t':
+        if (start != end) {
+          end_tmp = end, start_tmp = start;
+          while (start_tmp < end_tmp && data[start_tmp] == ' ') ++start_tmp;
+          while (end_tmp - 1 > start_tmp && data[end_tmp - 1] == ' ') --end_tmp;
+          master_view->AddView(
+              x, y, std::string_view(&data[start_tmp], end_tmp - start_tmp));
+        }
         ++end, ++x, start = end;
+        if (c == '\n') y++, x = 0;
         break;
       default:
         ++end;

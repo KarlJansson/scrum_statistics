@@ -8,5 +8,9 @@ class ScrumPrinter {
  private:
   void Histograms(DataFrameView& view);
   void Burndowns(DataFrameView& view);
-  void ExtraHours(DataFrameView& view);
+
+  DataFrameView PrepareHistogramData(DataFrameView& view);
+  DataFrameView PrepareHBurndownData(DataFrameView& view);
+
+  std::vector<char> string_buffer_;
 };

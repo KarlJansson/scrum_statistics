@@ -29,7 +29,11 @@ class DataFrameView {
   void AppendRow(std::vector<std::string_view> row);
   void AppendRow(std::size_t row, DataFrameView& view);
 
+  float MaxValue(const std::string& name);
+
   DataFrameView FilterFrameView(std::vector<std::string> column_names);
+
+  void Clear() { frame_.clear(); };
 
  private:
   const std::string& name_;

@@ -28,7 +28,12 @@ void DataFrameView::PrintView() {
 size_t DataFrameView::GetSizeX() { return frame_.size(); }
 
 size_t DataFrameView::GetSizeY() {
-  return frame_.empty() ? 0 : frame_[0].size();
+  if (frame_.empty()) return 0;
+
+  auto y = 0;
+  for (auto& vec : frame_)
+    if (y < vec.size()) y = vec.size();
+  return y;
 }
 void DataFrameView::RemoveColumn(size_t x) {
   frame_.erase(std::begin(frame_) + x);
@@ -43,8 +48,9 @@ void DataFrameView::AppendColumn(std::vector<std::string_view> column) {
 }
 
 void DataFrameView::AppendRow(std::vector<std::string_view> row) {
-  auto x = 0;
-  for (auto& vec : frame_) vec.emplace_back(row[x++]);
+  std::size_t y = GetSizeY();
+  for (auto x = 0; x < row.size(); ++x)
+    if (!row[x].empty()) AddView(x, y, row[x]);
 }
 
 void DataFrameView::AppendRow(std::size_t row, DataFrameView& view) {
@@ -53,6 +59,18 @@ void DataFrameView::AppendRow(std::size_t row, DataFrameView& view) {
     auto str_view = view.GetView(x, row);
     if (!str_view.empty()) AddView(x, y, str_view);
   }
+}
+
+float DataFrameView::MaxValue(const std::string& name) {
+  float max_value = 0.f;
+  for (auto i = 0; i < frame_.size(); ++i)
+    if (!frame_[i].empty() && std::string(frame_[i][0]).compare(name) == 0)
+      for (auto ii = 1; ii < frame_[i].size(); ++ii)
+        if (!frame_[i][ii].empty())
+          if (float value = std::stof(std::string(frame_[i][ii]));
+              value > max_value)
+            max_value = value;
+  return max_value;
 }
 
 DataFrameView DataFrameView::FilterFrameView(

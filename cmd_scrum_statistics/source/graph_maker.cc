@@ -36,8 +36,8 @@ std::string GraphMaker::GeneratePlot(DataFrameView& view) {
   for (auto y = 1; y < view.GetSizeY(); ++y) {
     for (auto x = 0; x < view.GetSizeX(); ++x) {
       str_view = view.GetView(x, y);
-      out +=
-          str_view.empty() ? std::string(last_value[x]) : std::string(str_view);
+      out += (str_view.empty() ? std::string(last_value[x])
+                               : std::string(str_view));
       if (x < view.GetSizeX() - 1) out += " ";
       if (!str_view.empty()) last_value[x] = str_view;
     }
@@ -45,29 +45,34 @@ std::string GraphMaker::GeneratePlot(DataFrameView& view) {
   }
   out += "EOD\n";
 
-  out += "plot ";
-  for (auto i = 1; i < view.GetSizeX(); ++i) {
-    switch (type_) {
-      case kHistogram:
-        out += "'$data' using " + std::to_string(i + 1) + " t \"" +
-               std::string(view.GetView(i, 0)) + "\" ls " + std::to_string(i);
-        break;
-      default:
-        out += "'$data' using " + std::to_string(1) + ":" +
-               std::to_string(i + 1) + " t \"" +
-               std::string(view.GetView(i, 0)) + "\" ls " + std::to_string(i);
-    }
-    out += i == view.GetSizeX() - 1 ? "" : ",\\\n";
+  switch (type_) {
+    case kHistogram:
+      out += "set ylabel \"Hours\"\n";
+      out += "plot ";
+      for (auto i = 1; i < view.GetSizeX(); ++i) {
+        out += "'$data' using " + std::to_string(i + 1) + ":xtic(1) t '" +
+               std::string(view.GetView(i, 0)) + "' ls " + std::to_string(i);
+        out += i == view.GetSizeX() - 1 ? "" : ",\\\n";
+      }
+      break;
+    default:
+      out += "plot ";
+      for (auto i = 1; i < view.GetSizeX(); ++i) {
+        out += "'$data' using 1:" + std::to_string(i + 1) + " t '" +
+               std::string(view.GetView(i, 0)) + "' ls " + std::to_string(i);
+        out += i == view.GetSizeX() - 1 ? "" : ",\\\n";
+      }
   }
+
   return out;
 }
 
 std::string GraphMaker::SetStyle(DataFrameView& view) {
   std::string style =
-      "set style line 1 lt rgb \"#A00000\" lw 2 pt 1\n"
-      "set style line 2 lt rgb \"#00A000\" lw 2 pt 6\n"
-      "set style line 3 lt rgb \"#5060D0\" lw 2 pt 2\n"
-      "set style line 4 lt rgb \"#F25900\" lw 2 pt 9\n"
+      "set style line 1 lt rgb \"#5bdba7\" lw 2 pt 1\n"
+      "set style line 2 lt rgb \"#e9a757\" lw 2 pt 6\n"
+      "set style line 3 lt rgb \"#dc0960\" lw 2 pt 2\n"
+      "set style line 4 lt rgb \"#2f9dcd\" lw 2 pt 9\n"
       // Line style for axes
       "set style line 80 lt rgb \"#808080\"\n"
       // Line style for grid
@@ -77,7 +82,7 @@ std::string GraphMaker::SetStyle(DataFrameView& view) {
       "set border 3 back linestyle 80\n"
       "set xtics nomirror\n"
       "set ytics nomirror\n"
-      "set boxwidth 0.75 absolute\n"
+      "set boxwidth 0.15 absolute\n"
       "set style fill solid 1.00 border lt -1\n";
 
   switch (type_) {

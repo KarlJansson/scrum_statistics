@@ -47,39 +47,55 @@ void ScrumPrinter::Burndowns(DataFrameView& view) {
 }
 
 DataFrameView ScrumPrinter::PrepareHistogramData(DataFrameView& view) {
-  std::string last_sprint_id;
-  DataFrameView tmp_view(view.GetName());
-
-  auto filtered_view = view.FilterFrameView(
-      {"SprintId", "Points", "SprintFocus", "SprintTime", "ExtraTime"});
-
-  int finished_points;
-  for (auto i = 1; i < filtered_view.GetSizeY(); ++i) {
-    auto sprint_id = filtered_view.GetView(0, i);
-    auto points = filtered_view.GetView(1, i);
-    if (!sprint_id.empty()) {
-      if (std::string(last_sprint_id).compare(std::string(sprint_id)) != 0 ||
-          filtered_view.GetSizeY() - 1 == i) {
-        tmp_view.AppendRow(i, filtered_view);
-        if (!last_sprint_id.empty()) tmp_view.AppendRow(i - 1, filtered_view);
-        last_sprint_id = sprint_id;
-      }
-    } else if (!points.empty()) {
-    }
-  }
+  std::string_view sprint_id;
+  std::string_view last_sprint_id;
 
   DataFrameView result_view(view.GetName());
-  result_view.AppendRow(0, filtered_view);
+  auto filtered_view = view.FilterFrameView(
+      {"SprintId", "Points", "SprintFocus", "SprintTime", "ExtraTime"});
+  result_view.AppendRow({StoreCustom("SprintId"), StoreCustom("PointTime"),
+                         StoreCustom("Meetings"), StoreCustom("ExtraTime")});
 
-  int point_value;
-  for (auto i = 0; i < tmp_view.GetSizeY(); ++i) {
-    result_view.AppendRow(i, tmp_view);
+  DataFrameView tmp_view(view.GetName());
+  tmp_view.AppendRow(0, filtered_view);
+  for (auto i = 1; i < filtered_view.GetSizeY(); ++i) {
+    sprint_id = filtered_view.GetView(0, i);
+    if (!sprint_id.empty()) {
+      if (!last_sprint_id.empty() &&
+          std::string(last_sprint_id).compare(std::string(sprint_id)) != 0) {
+        result_view.AppendRow(HistogramRow(tmp_view, last_sprint_id));
+        tmp_view.AppendRow(0, filtered_view);
+      }
+      last_sprint_id = sprint_id;
+    }
+    tmp_view.AppendRow(i, filtered_view);
   }
+  result_view.AppendRow(HistogramRow(tmp_view, last_sprint_id));
 
   return result_view;
+}
+
+std::vector<std::string_view> ScrumPrinter::HistogramRow(
+    DataFrameView& view, std::string_view sprint_id) {
+  auto extra_time = view.MaxValue("ExtraTime");
+  auto sprint_time = view.MaxValue("SprintTime");
+  auto sprint_focus = view.MaxValue("SprintFocus");
+  auto focus_time = (1.f - (sprint_focus / 100.f)) * sprint_time;
+  sprint_time -= focus_time + extra_time;
+  view.Clear();
+
+  return {sprint_id, StoreCustom(std::to_string(sprint_time)),
+          StoreCustom(std::to_string(focus_time)),
+          StoreCustom(std::to_string(extra_time))};
 }
 
 DataFrameView ScrumPrinter::PrepareHBurndownData(DataFrameView& view) {
   DataFrameView tmp_view(view.GetName());
   return tmp_view;
+}
+
+std::string_view ScrumPrinter::StoreCustom(const std::string& value) {
+  string_buffer_.push_back(value);
+  return std::string_view(string_buffer_.back().data(),
+                          string_buffer_.back().size());
 }
